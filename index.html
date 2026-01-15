@@ -3,835 +3,652 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ev Yapımı Lezzetler | Menü</title>
-  <meta name="description" content="Ev yapımı mantı, sarma, kurabiye ve tatlılar. Sipariş için WhatsApp." />
+  <title>Lezzet Atölyesi | Fiyat Listesi</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#fff8f1;
-      --card:#ffffff;
-      --text:#1f1f1f;
-      --muted:#6b6b6b;
-      --line:#ece6df;
-      --accent:#b45309;  /* sıcak amber */
-      --accent2:#2f855a; /* yeşil */
-      --shadow: 0 10px 30px rgba(0,0,0,.06);
-      --radius:18px;
+      /* Logo uyumlu soft palet */
+      --bg:#f6f1ea;         /* bej */
+      --paper:#ffffff;
+      --paper2:#fbfaf8;
+      --ink:#0b1f36;
+
+      --sage:#87957a;
+      --rose:#e6b9b2;
+      --navy:#0b2238;
+
+      --line:rgba(11,31,54,.16);
+      --line2:rgba(11,31,54,.10);
+      --shadow:0 14px 38px rgba(11,31,54,.10);
+
+      --radius:22px;
+      --max:1120px;
     }
+
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
-      background:var(--bg);
-      color:var(--text);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(1100px 650px at 18% 10%, rgba(230,185,178,.22), transparent 55%),
+        radial-gradient(900px 520px at 86% 16%, rgba(135,149,122,.20), transparent 55%),
+        radial-gradient(900px 620px at 35% 95%, rgba(11,31,54,.06), transparent 60%),
+        var(--bg);
     }
     a{color:inherit}
-    .wrap{max-width:1100px;margin:0 auto;padding:18px}
-    .topbar{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(10px);
-      background: color-mix(in srgb, var(--bg) 78%, transparent);
-      border-bottom:1px solid var(--line);
-    }
-    .topbar-inner{
-      max-width:1100px;margin:0 auto;padding:12px 18px;
-      display:flex; gap:12px; align-items:center; justify-content:space-between;
-    }
-    .brand{display:flex; align-items:center; gap:10px}
-    .logo{
-      width:38px;height:38px;border-radius:12px;
-      background:linear-gradient(135deg,#ffe7cc,#ffd4a3);
-      display:grid;place-items:center;
-      box-shadow:var(--shadow);
-      border:1px solid #f5d9bb;
-      font-weight:800;color:var(--accent);
-    }
-    .brand h1{font-size:16px;margin:0;line-height:1.1}
-    .brand p{margin:2px 0 0 0;font-size:12px;color:var(--muted)}
-    .actions{display:flex; gap:10px; align-items:center}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:10px 12px; border-radius:14px;
-      border:1px solid var(--line);
-      background:var(--card);
-      box-shadow: 0 6px 18px rgba(0,0,0,.05);
-      text-decoration:none;
-      font-weight:650;
-      font-size:13px;
-      white-space:nowrap;
-    }
-    .btn.primary{
-      background:#25d366; border-color:#1fb85a; color:white;
-    }
-    .hero{
-      margin:14px 0 18px 0;
-      display:grid; gap:14px;
-      grid-template-columns: 1.3fr .7fr;
-    }
-    @media (max-width:900px){ .hero{grid-template-columns:1fr} }
-    .hero-card{
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      overflow:hidden;
-      background:var(--card);
-      box-shadow:var(--shadow);
-      position:relative;
-    }
-    .hero-img{
-      height:240px;
-      background:
-        linear-gradient(120deg, rgba(0,0,0,.45), rgba(0,0,0,.10)),
-        url("https://images.unsplash.com/photo-1526318896980-cf78c088247c?auto=format&fit=crop&w=1600&q=80");
-      background-size:cover; background-position:center;
-    }
-    .hero-content{padding:16px}
-    .hero-title{margin:0;font-size:22px}
-    .hero-sub{margin:8px 0 0 0;color:color-mix(in srgb, var(--text) 40%, #000);font-size:14px}
-    .pill-row{display:flex;flex-wrap:wrap; gap:8px; margin-top:12px}
-    .pill{
-      font-size:12px; color:#3b3b3b;
-      padding:7px 10px; border-radius:999px;
-      background:#fff3e6; border:1px solid #ffe0c2;
-    }
-    .mini-card{padding:16px}
-    .mini-title{margin:0 0 8px 0;font-size:16px}
-    .mini-text{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
-    .divider{height:1px;background:var(--line);margin:14px 0}
+    .wrap{width:min(var(--max), 92vw); margin:0 auto}
+    .muted{opacity:.78}
 
-    .controls{
-      display:flex; gap:10px; flex-wrap:wrap;
-      align-items:center; justify-content:space-between;
-      margin:12px 0 14px 0;
+    /* Background leaf sketch (çok hafif) */
+    .leafwash{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.10;
+      mix-blend-mode:multiply;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900' viewBox='0 0 900 900'%3E%3Cg fill='none' stroke='%230b1f36' stroke-opacity='.45' stroke-width='1.4'%3E%3Cpath d='M120 640c120-90 210-240 190-410'/%3E%3Cpath d='M170 700c180-120 280-360 250-560'/%3E%3Cpath d='M760 690c-120-160-90-420 120-560'/%3E%3Cpath d='M710 630c-90-120-60-310 90-420'/%3E%3C/g%3E%3C/svg%3E");
+      background-size: 880px 880px;
+      background-position: 50% 20%;
     }
-    .search{
-      flex:1;
-      min-width:220px;
-      display:flex; gap:10px; align-items:center;
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:10px 12px;
-      box-shadow: 0 6px 18px rgba(0,0,0,.04);
+
+    /* Header */
+    header{padding:54px 0 18px; text-align:center}
+    .brand{
+      display:inline-flex;
+      align-items:center;
+      gap:16px;
+      padding:18px 22px;
+      border-radius:18px;
+      background:rgba(255,255,255,.78);
+      border:1px solid rgba(11,31,54,.12);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(6px);
     }
-    .search input{
-      width:100%;
-      border:none; outline:none;
-      font-size:14px; background:transparent;
+    .brand img{
+      width:62px;height:62px;border-radius:50%;
+      object-fit:cover;
+      border:1px solid rgba(11,31,54,.14);
+      background:#fff;
     }
-    .chips{display:flex; gap:8px; flex-wrap:wrap}
-    .chip{
-      cursor:pointer;
-      user-select:none;
+    .brand .name{
+      font-family:"Playfair Display", serif;
+      font-weight:600;
+      font-size:30px;
+      letter-spacing:.02em;
+      line-height:1.05;
+    }
+    .brand .sub{
+      margin-top:4px;
       font-size:12px;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:var(--card);
+      letter-spacing:.14em;
+      font-weight:800;
+      color:rgba(11,31,54,.66);
     }
-    .chip.active{
-      border-color:#ffd1a0;
-      background:#fff0df;
-      color:#7a3b07;
+    .topnote{
+      margin:12px auto 0;
+      width:min(820px, 92vw);
+      font-size:13px;
+      color:rgba(11,31,54,.74);
+    }
+
+    /* Mini navigation (çok minimal) */
+    .nav{
+      margin:18px auto 0;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:10px;
+      width:min(980px, 92vw);
+    }
+    .nav a{
+      text-decoration:none;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.06em;
+      padding:10px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.65);
+      border:1px solid rgba(11,31,54,.10);
+      color:rgba(11,31,54,.74);
+      transition:transform .12s ease, background .12s ease;
+    }
+    .nav a:hover{transform:translateY(-1px); background:rgba(255,255,255,.86)}
+
+    /* Sections */
+    .section{padding:26px 0 10px}
+    .title{
+      margin:26px 0 14px;
+      text-align:center;
+      font-family:"Playfair Display", serif;
+      font-weight:600;
+      letter-spacing:.02em;
+      font-size:34px;
+    }
+    .subtitle{
+      text-align:center;
+      margin:-6px auto 14px;
+      font-size:13px;
+      color:rgba(11,31,54,.70);
+      width:min(780px, 92vw);
+    }
+
+    /* CONNECTED LAYOUT (omurga + node + connector) */
+    .connected{
+      position:relative;
+      padding:10px 0 0;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:18px;
+      align-items:stretch;
+    }
+
+    /* Spine (dikey omurga) - masaüstünde orta */
+    .connected::before{
+      content:"";
+      position:absolute;
+      top:0;
+      bottom:0;
+      left:50%;
+      transform:translateX(-50%);
+      width:2px;
+      background:linear-gradient(
+        to bottom,
+        transparent,
+        rgba(135,149,122,.55),
+        rgba(230,185,178,.55),
+        transparent
+      );
+      border-radius:999px;
+      opacity:.75;
+    }
+
+    /* Card */
+    .card{
+      grid-column: span 6;
+      border-radius: var(--radius);
+      background:rgba(255,255,255,.82);
+      border:1px solid rgba(11,31,54,.12);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      min-height: 100%;
+    }
+
+    /* Connector line from spine to card */
+    .card::after{
+      content:"";
+      position:absolute;
+      top:22px;
+      height:2px;
+      width:72px;
+      background:linear-gradient(90deg, rgba(135,149,122,.0), rgba(135,149,122,.55), rgba(230,185,178,.55));
+      opacity:.9;
+    }
+    /* left column cards connect from center to left */
+    .card.left::after{
+      right:-72px;
+      transform:translateX(0);
+    }
+    /* right column cards connect from center to right */
+    .card.right::after{
+      left:-72px;
+      transform:translateX(0);
+      background:linear-gradient(90deg, rgba(230,185,178,.55), rgba(135,149,122,.55), rgba(135,149,122,.0));
+    }
+
+    /* Node (spine üzerindeki düğüm) */
+    .node{
+      position:absolute;
+      top:16px;
+      width:14px;height:14px;border-radius:50%;
+      left:50%;
+      transform:translateX(-50%);
+      background:var(--paper);
+      border:1px solid rgba(11,31,54,.14);
+      box-shadow:
+        0 0 0 6px rgba(230,185,178,.18),
+        0 0 0 12px rgba(135,149,122,.10);
+      z-index:3;
+    }
+    /* card header */
+    .card__head{
+      padding:14px 16px 10px;
+      background:linear-gradient(180deg, rgba(11,34,56,.06), rgba(11,34,56,0));
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .card__head b{
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:rgba(11,31,54,.70);
+    }
+    .card__head span{
+      font-size:12px;
+      color:rgba(11,31,54,.58);
       font-weight:700;
     }
 
-    .section{
-      margin:18px 0 8px 0;
-      display:flex; gap:12px; align-items:flex-end; justify-content:space-between;
-    }
-    .section h2{margin:0;font-size:18px}
-    .section p{margin:0;color:var(--muted);font-size:13px}
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
+    .rows{padding:6px 14px 12px}
+    .row{
+      display:flex;
+      justify-content:space-between;
       gap:12px;
+      padding:10px 4px;
+      border-bottom:1px dashed rgba(11,31,54,.18);
     }
-    @media (max-width:1000px){ .grid{grid-template-columns:repeat(2,1fr)} }
-    @media (max-width:640px){ .grid{grid-template-columns:1fr} }
+    .row:last-child{border-bottom:none}
 
-    .card{
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      overflow:hidden;
-      background:var(--card);
-      box-shadow:var(--shadow);
-      display:flex; flex-direction:column;
-      min-height: 180px;
-    }
-    .card .img{
-      height:140px;
-      background-size:cover;
-      background-position:center;
-      position:relative;
-    }
+    .item{font-weight:650; font-size:14px; line-height:1.25rem; color:rgba(11,31,54,.92)}
+    .price{font-weight:850; white-space:nowrap; font-size:14px; color:var(--navy)}
+    .note{font-size:12px; color:rgba(11,31,54,.66); margin-top:2px}
+
     .badge{
-      position:absolute; left:12px; bottom:12px;
-      background:rgba(255,255,255,.92);
-      border:1px solid rgba(255,255,255,.75);
-      padding:7px 10px;
+      display:inline-block;
+      margin-left:8px;
+      font-size:11px;
+      font-weight:850;
+      letter-spacing:.06em;
+      padding:4px 8px;
       border-radius:999px;
-      font-weight:800;
-      color:var(--accent);
-      box-shadow: 0 10px 20px rgba(0,0,0,.10);
-      font-size:13px;
-      backdrop-filter: blur(8px);
+      border:1px solid rgba(11,31,54,.14);
+      background:rgba(11,31,54,.04);
+      color:rgba(11,31,54,.72);
+      vertical-align:middle;
     }
-    .card .body{padding:14px}
-    .name{margin:0;font-size:16px}
-    .desc{margin:7px 0 0 0;color:var(--muted);font-size:13px;line-height:1.45}
-    .meta{
-      margin-top:10px;
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+
+    /* Full width card */
+    .span12{grid-column: span 12}
+
+    /* CTA */
+    .cta{
+      margin:14px 0 0;
+      display:flex;
+      justify-content:center;
     }
-    .unit{
-      font-size:12px;
-      padding:6px 10px;
-      border:1px solid var(--line);
-      border-radius:999px;
-      color:#454545;
-      background:#fbfbfb;
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 16px;
+      border-radius:14px;
+      text-decoration:none;
+      font-weight:850;
+      letter-spacing:.02em;
+      background:rgba(11,31,54,.06);
+      border:1px solid rgba(11,31,54,.14);
+      color:var(--ink);
     }
+    .btn .icon{
+      width:10px;height:10px;border-radius:50%;
+      background:var(--sage);
+      box-shadow:0 0 0 4px rgba(135,149,122,.18);
+    }
+
     footer{
-      margin:24px 0 18px 0;
+      padding:30px 0 50px;
       text-align:center;
-      color:var(--muted);
-      font-size:13px;
+      font-size:12px;
+      color:rgba(11,31,54,.68);
     }
-    .small{font-size:12px;color:var(--muted)}
+
+    /* Mobile: spine solda, kartlar tek kolon, bağlantı daha kısa */
+    @media (max-width: 900px){
+      .grid{gap:14px}
+      .card{grid-column: span 12;}
+      .title{font-size:30px}
+
+      .connected::before{
+        left:18px;
+        transform:none;
+      }
+      .node{
+        left:18px;
+        transform:none;
+      }
+      .card::after{
+        left:18px;
+        width:26px;
+        background:linear-gradient(90deg, rgba(230,185,178,.55), rgba(135,149,122,.55));
+      }
+      .card.left::after,
+      .card.right::after{left:18px}
+    }
   </style>
 </head>
 
 <body>
-  <!-- ÜST BAR -->
-  <div class="topbar">
-    <div class="topbar-inner">
+  <div class="leafwash"></div>
+
+  <div class="wrap">
+    <header>
       <div class="brand">
-        <div class="logo">🍰</div>
+        <img src="logo.png" alt="Lezzet Atölyesi Logo" />
         <div>
-          <h1>Ev Yapımı Lezzetler</h1>
-          <p>Menü • Fiyat Listesi • Görselli Katalog</p>
+          <div class="name">Lezzet Atölyesi</div>
+          <div class="sub">FİYAT LİSTESİ</div>
         </div>
       </div>
 
-      <div class="actions">
-        <!-- WhatsApp numaranı buraya yaz: 90 ile başlayıp başında + olmadan -->
-        <a class="btn primary" href="https://wa.me/90XXXXXXXXXX?text=Merhaba,%20sipariş%20vermek%20istiyorum." target="_blank" rel="noopener">
-          WhatsApp Sipariş
-        </a>
+      <div class="topnote muted">
+        Ev yapımı tatlı & tuzlu çeşitleri. Siparişler için iletişime geçebilirsiniz.
       </div>
-    </div>
+
+      <nav class="nav" aria-label="Kategori menüsü">
+        <a href="#urunler">Ürünler</a>
+        <a href="#kurabiyeler">Kurabiyeler</a>
+        <a href="#borcam">Borcam Tatlıları</a>
+        <a href="#bardak">Bardak Tatlıları</a>
+        <a href="#salatalar">Salatalar</a>
+        <a href="#hamur">Hamur İşi</a>
+        <a href="#tatlilar">Adet & Kiloluk</a>
+      </nav>
+    </header>
   </div>
 
-  <div class="wrap">
+  <!-- ÜRÜNLER -->
+  <section class="section" id="urunler">
+    <div class="wrap">
+      <h2 class="title">Ürünler</h2>
 
-    <!-- HERO -->
-    <div class="hero">
-      <div class="hero-card">
-        <div class="hero-img"></div>
-        <div class="hero-content">
-          <h2 class="hero-title">Günlük, Ev Yapımı, Sipariş Üzerine</h2>
-          <p class="hero-sub">Mantı • Sarma • Kurabiye • Borcam tatlıları • Hamur işi • Salata</p>
-          <div class="pill-row">
-            <span class="pill">✅ Hijyenik hazırlık</span>
-            <span class="pill">✅ Taze üretim</span>
-            <span class="pill">✅ Özel gün siparişi</span>
-            <span class="pill">✅ Teslimat/teslim alma (isteğe bağlı)</span>
+      <div class="connected">
+        <div class="node"></div>
+        <div class="grid">
+          <div class="card left">
+            <div class="card__head"><b>Ev Yapımı</b><span>kg / adet</span></div>
+            <div class="rows">
+              <div class="row"><div class="item">Mantı (kg)</div><div class="price">550₺</div></div>
+              <div class="row"><div class="item">Pelmeni Mantı (kg)</div><div class="price">550₺</div></div>
+              <div class="row">
+                <div>
+                  <div class="item">Yaprak Sarması (kg)</div>
+                  <div class="note">Pişmiş: 550₺</div>
+                </div>
+                <div class="price">500₺</div>
+              </div>
+              <div class="row">
+                <div>
+                  <div class="item">İçli Köfte (adet)</div>
+                  <div class="note">Kızarmış: 65₺</div>
+                </div>
+                <div class="price">60₺</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card right">
+            <div class="card__head"><b>Makarna</b><span>kg</span></div>
+            <div class="rows">
+              <div class="row"><div class="item">Erişte (kg)</div><div class="price">250₺</div></div>
+              <div class="row"><div class="item">Sebzeli Erişte (kg)</div><div class="price">300₺</div></div>
+            </div>
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="hero-card mini-card">
-        <h3 class="mini-title">Nasıl kullanılır?</h3>
-        <p class="mini-text">
-          Ürün arama kutusundan istediğini yaz. Kategori butonlarıyla filtrele.
-          Beğendiğin ürün için WhatsApp’tan yazıp sipariş verebilirsin.
-        </p>
-        <div class="divider"></div>
-        <p class="mini-text">
-          <strong>Not:</strong> Fotoğraflar şimdilik örnek. Kendi fotoğraflarını ekleyince
-          “görsel” kısmını kolayca değiştireceğiz.
-        </p>
-        <div class="divider"></div>
-        <p class="small"><strong>İletişim:</strong> 05xx xxx xx xx • Instagram: @kullaniciadi</p>
+  <!-- KURABİYELER -->
+  <section class="section" id="kurabiyeler">
+    <div class="wrap">
+      <h2 class="title">Kurabiyeler</h2>
+      <div class="subtitle">Tepsi fiyatları — adet bilgileri rozet içinde.</div>
+
+      <div class="connected">
+        <div class="node"></div>
+        <div class="grid">
+          <div class="card left">
+            <div class="card__head"><b>Tepsi</b><span>klasikler</span></div>
+            <div class="rows">
+              <div class="row"><div class="item">Hindistan Cevizli <span class="badge">50 adet</span></div><div class="price">400₺</div></div>
+              <div class="row"><div class="item">Damla Çikolatalı <span class="badge">50 adet</span></div><div class="price">400₺</div></div>
+              <div class="row"><div class="item">Un Kurabiyesi</div><div class="price">400₺</div></div>
+              <div class="row"><div class="item">Elmalı Kurabiye</div><div class="price">400₺</div></div>
+              <div class="row"><div class="item">Mısır Gevrekli</div><div class="price">400₺</div></div>
+              <div class="row"><div class="item">Tuzlu Kurabiye (çeşitleri)</div><div class="price">400₺</div></div>
+            </div>
+          </div>
+
+          <div class="card right">
+            <div class="card__head"><b>Tepsi</b><span>özel</span></div>
+            <div class="rows">
+              <div class="row"><div class="item">Çikolatalı Fındıklı Cookie <span class="badge">17–18 adet</span></div><div class="price">600₺</div></div>
+              <div class="row">
+                <div>
+                  <div class="item">Browni Kurabiye</div>
+                  <div class="note">Ortalama 900 gr (35 adet)</div>
+                </div>
+                <div class="price">400₺</div>
+              </div>
+              <div class="row"><div class="item">Kakaolu Çikolatalı Çatlak</div><div class="price">400₺</div></div>
+              <div class="row"><div class="item">Hatay Kömbesi</div><div class="price">400₺</div></div>
+              <div class="row"><div class="item">Çörekotlu Kurabiye</div><div class="price">400₺</div></div>
+              <div class="row"><div class="item">Kokoş Kurabiye</div><div class="price">400₺</div></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+  </section>
 
-    <!-- ARAMA + FİLTRE -->
-    <div class="controls">
-      <div class="search" title="Ürün ara">
-        🔎 <input id="q" type="text" placeholder="Örn: mantı, sarma, trileçe, kurabiye, su böreği..." />
-      </div>
-      <div class="chips" id="chips">
-        <span class="chip active" data-cat="all">Tümü</span>
-        <span class="chip" data-cat="ana">Ana ürünler</span>
-        <span class="chip" data-cat="kurabiye">Kurabiyeler</span>
-        <span class="chip" data-cat="tatli">Borcam tatlıları</span>
-        <span class="chip" data-cat="salata">Salatalar</span>
-        <span class="chip" data-cat="hamur">Hamur işi</span>
-        <span class="chip" data-cat="adet">Adet tatlılar</span>
+  <!-- BORCAM -->
+  <section class="section" id="borcam">
+    <div class="wrap">
+      <h2 class="title">Borcam Tatlıları</h2>
+
+      <div class="connected">
+        <div class="node"></div>
+        <div class="grid">
+          <div class="card left">
+            <div class="card__head"><b>Borcam</b><span>tepsi</span></div>
+            <div class="rows">
+              <div class="row"><div class="item">Trileçe (frambuazlı / karamelli)</div><div class="price">700₺</div></div>
+              <div class="row"><div class="item">Tiramisu</div><div class="price">700₺</div></div>
+              <div class="row"><div class="item">Kumlu Pasta</div><div class="price">700₺</div></div>
+              <div class="row"><div class="item">Islak Kek (tepsi)</div><div class="price">450₺</div></div>
+              <div class="row"><div class="item">Ağlayan Pasta (tepsi)</div><div class="price">450₺</div></div>
+            </div>
+          </div>
+
+          <div class="card right">
+            <div class="card__head"><b>Borcam</b><span>özel</span></div>
+            <div class="rows">
+              <div class="row"><div class="item">Kıbrıs Tatlısı (tepsi)</div><div class="price">700₺</div></div>
+              <div class="row"><div class="item">Frambuazlı Kremalı Beyaz Çikolatalı Borcam Pastası</div><div class="price">850₺</div></div>
+              <div class="row"><div class="item">Mozaik Pasta (portakallı / sade)</div><div class="price">300₺</div></div>
+              <div class="row"><div class="item">Kek Çeşitleri (1 kalıp)</div><div class="price">400₺</div></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+  </section>
 
-    <!-- LİSTE -->
-    <div class="section">
-      <div>
-        <h2>Ürünler</h2>
-        <p>Fiyatlar listene göre girildi. (İstersen “porsiyon/gramaj” eklerim.)</p>
+  <!-- BARDAK -->
+  <section class="section" id="bardak">
+    <div class="wrap">
+      <h2 class="title">Bardak Tatlıları</h2>
+
+      <div class="connected">
+        <div class="node"></div>
+        <div class="grid">
+          <div class="card left">
+            <div class="card__head"><b>Adet</b><span>bardak</span></div>
+            <div class="rows">
+              <div class="row"><div class="item">Magnolya (adet)</div><div class="price">75₺</div></div>
+              <div class="row"><div class="item">Cup Tiramisu (adet)</div><div class="price">75₺</div></div>
+              <div class="row"><div class="item">Tartolet</div><div class="price muted">İletişim</div></div>
+            </div>
+          </div>
+
+          <div class="card right">
+            <div class="card__head"><b>Not</b><span>bilgi</span></div>
+            <div class="rows">
+              <div class="row">
+                <div>
+                  <div class="item">Tartolet</div>
+                  <div class="note">Adet / boy bilgisine göre fiyatlandırılır.</div>
+                </div>
+                <div></div>
+              </div>
+              <div class="row">
+                <div>
+                  <div class="item">Yaş Pasta</div>
+                  <div class="note">Kişi sayısı ve modele göre fiyat için iletişime geçin.</div>
+                </div>
+                <div class="price muted">İletişim</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <p class="small" id="count"></p>
     </div>
+  </section>
 
-    <div class="grid" id="grid">
-      <!-- ========== ANA ÜRÜNLER ========== -->
-      <div class="card item" data-cat="ana" data-name="mantı">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1604909053197-2b4ac95d299a?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">450₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Mantı</h3>
-          <p class="desc">Ev yapımı mantı</p>
-          <div class="meta"><span class="unit">kg</span></div>
+  <!-- SALATALAR -->
+  <section class="section" id="salatalar">
+    <div class="wrap">
+      <h2 class="title">Salatalar</h2>
+
+      <div class="connected">
+        <div class="node"></div>
+        <div class="grid">
+          <div class="card left">
+            <div class="card__head"><b>Salata</b><span>kg</span></div>
+            <div class="rows">
+              <div class="row"><div class="item">Arpa Şehriye (yoğurtlu) (kg)</div><div class="price">250₺</div></div>
+              <div class="row"><div class="item">Makarna (yoğurtlu) (kg)</div><div class="price">250₺</div></div>
+              <div class="row"><div class="item">Brokoli</div><div class="price">300₺</div></div>
+              <div class="row"><div class="item">Patates</div><div class="price">250₺</div></div>
+            </div>
+          </div>
+
+          <div class="card right">
+            <div class="card__head"><b>Salata</b><span>kg</span></div>
+            <div class="rows">
+              <div class="row"><div class="item">Mercimek Köftesi (kg)</div><div class="price">300₺</div></div>
+              <div class="row"><div class="item">Kısır (kg)</div><div class="price">250₺</div></div>
+              <div class="row"><div class="item">Havuç Tarator</div><div class="price">250₺</div></div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div class="card item" data-cat="ana" data-name="pelmeni mantı">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1604909053197-2b4ac95d299a?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">450₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Pelmeni Mantı</h3>
-          <p class="desc">Pelmeni tarzı mantı</p>
-          <div class="meta"><span class="unit">kg</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="ana" data-name="yaprak sarması">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1608198093002-dee4f7a6f41b?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">400₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Yaprak Sarması</h3>
-          <p class="desc">Çiğ/soğuk teslim fiyatı</p>
-          <div class="meta"><span class="unit">kg</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="ana" data-name="yaprak sarması pişmiş">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1608198093002-dee4f7a6f41b?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">450₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Yaprak Sarması (Pişmiş)</h3>
-          <p class="desc">Pişmiş teslim</p>
-          <div class="meta"><span class="unit">kg</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="ana" data-name="içli köfte kızarmış">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">60₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">İçli Köfte (Kızarmış)</h3>
-          <p class="desc">Kızarmış servis</p>
-          <div class="meta"><span class="unit">adet</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="ana" data-name="içli köfte">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">55₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">İçli Köfte</h3>
-          <p class="desc">Standart</p>
-          <div class="meta"><span class="unit">adet</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="ana" data-name="erişte">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1526318896980-cf78c088247c?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">250₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Erişte</h3>
-          <p class="desc">Ev yapımı erişte</p>
-          <div class="meta"><span class="unit">kg</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="ana" data-name="sebzeli erişte">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1526318896980-cf78c088247c?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">300₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Sebzeli Erişte</h3>
-          <p class="desc">Sebzeli ev yapımı erişte</p>
-          <div class="meta"><span class="unit">kg</span></div>
-        </div>
-      </div>
-
-      <!-- ========== KURABİYELER (TEPSİ) ========== -->
-      <div class="card item" data-cat="kurabiye" data-name="hindistan cevizli kurabiye">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">400₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Hindistan Cevizli Kurabiye</h3>
-          <p class="desc">Tepsi</p>
-          <div class="meta"><span class="unit">tepsi</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="kurabiye" data-name="çikolatalı fındıklı cookie">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">600₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Çikolatalı Fındıklı Cookie</h3>
-          <p class="desc">Tepsi</p>
-          <div class="meta"><span class="unit">tepsi</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="kurabiye" data-name="damla çikolatalı kurabiye">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">400₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Damla Çikolatalı Kurabiye</h3>
-          <p class="desc">Tepsi</p>
-          <div class="meta"><span class="unit">tepsi</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="kurabiye" data-name="tuzlu kurabiye çeşitleri">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">400₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Tuzlu Kurabiye (Çeşitleri)</h3>
-          <p class="desc">Tepsi</p>
-          <div class="meta"><span class="unit">tepsi</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="kurabiye" data-name="un kurabiyesi">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1542826438-bd32f43d626f?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">400₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Un Kurabiyesi</h3>
-          <p class="desc">Tepsi</p>
-          <div class="meta"><span class="unit">tepsi</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="kurabiye" data-name="mısır gevrekli kurabiye">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">400₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Mısır Gevrekli Kurabiye</h3>
-          <p class="desc">Tepsi</p>
-          <div class="meta"><span class="unit">tepsi</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="kurabiye" data-name="browni kurabiye">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">400₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Browni Kurabiye</h3>
-          <p class="desc">Tepsi</p>
-          <div class="meta"><span class="unit">tepsi</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="kurabiye" data-name="kakaolu çikolatalı çatlak kurabiye">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1542826438-bd32f43d626f?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">400₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Kakaolu Çikolatalı Çatlak Kurabiye</h3>
-          <p class="desc">Tepsi</p>
-          <div class="meta"><span class="unit">tepsi</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="kurabiye" data-name="hatay kömbesi">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1542826438-bd32f43d626f?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">400₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Hatay Kömbesi</h3>
-          <p class="desc">Tepsi</p>
-          <div class="meta"><span class="unit">tepsi</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="kurabiye" data-name="çörekotlu kurabiye">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">400₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Çörekotlu Kurabiye</h3>
-          <p class="desc">Tepsi</p>
-          <div class="meta"><span class="unit">tepsi</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="kurabiye" data-name="kokoş kurabiye">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">400₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Kokoş Kurabiye</h3>
-          <p class="desc">Tepsi</p>
-          <div class="meta"><span class="unit">tepsi</span></div>
-        </div>
-      </div>
-
-      <!-- ========== BORCAM TATLILARI ========== -->
-      <div class="card item" data-cat="tatli" data-name="trileçe frambuazlı karamelli">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1571115177098-24ec42ed204d?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">600₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Trileçe (Frambuazlı / Karamelli)</h3>
-          <p class="desc">Borcam/tepsi</p>
-          <div class="meta"><span class="unit">tepsi</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="tatli" data-name="kek çeşitleri kalıp">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1542826438-bd32f43d626f?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">300₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Kek Çeşitleri</h3>
-          <p class="desc">1 kalıp (kakaolu, cevizli-tarçınlı, sade, mozaik vb.)</p>
-          <div class="meta"><span class="unit">kalıp</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="tatli" data-name="ıslak kek tepsi">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1542826438-bd32f43d626f?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">400₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Islak Kek</h3>
-          <p class="desc">Tepsi</p>
-          <div class="meta"><span class="unit">tepsi</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="tatli" data-name="ağlayan pasta tepsi">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1606312619070-d48b0f2c4a0a?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">400₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Ağlayan Pasta</h3>
-          <p class="desc">Tepsi</p>
-          <div class="meta"><span class="unit">tepsi</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="tatli" data-name="kıbrıs tatlısı tepsi">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">600₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Kıbrıs Tatlısı</h3>
-          <p class="desc">Tepsi</p>
-          <div class="meta"><span class="unit">tepsi</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="tatli" data-name="frambuazlı kremalı beyaz çikolatalı borcam pastası">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">800₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Frambuazlı Kremalı Beyaz Çikolatalı Borcam Pastası</h3>
-          <p class="desc">Borcam</p>
-          <div class="meta"><span class="unit">borcam</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="tatli" data-name="mozaik pasta portakallı sade">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1599785209707-28c9e0efb8f9?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">300₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Mozaik Pasta (Portakallı / Sade)</h3>
-          <p class="desc">Borcam</p>
-          <div class="meta"><span class="unit">borcam</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="tatli" data-name="magnolya">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">70₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Magnolya</h3>
-          <p class="desc">Adet</p>
-          <div class="meta"><span class="unit">adet</span></div>
-        </div>
-      </div>
-
-      <!-- ========== SALATALAR ========== -->
-      <div class="card item" data-cat="salata" data-name="arpa şehriye salatası yoğurtlu">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">250₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Arpa Şehriye Salatası (Yoğurtlu)</h3>
-          <p class="desc">Kg</p>
-          <div class="meta"><span class="unit">kg</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="salata" data-name="makarna salatası yoğurtlu">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">250₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Makarna Salatası (Yoğurtlu)</h3>
-          <p class="desc">Kg</p>
-          <div class="meta"><span class="unit">kg</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="salata" data-name="mercimek köftesi">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">300₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Mercimek Köftesi</h3>
-          <p class="desc">Kg</p>
-          <div class="meta"><span class="unit">kg</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="salata" data-name="kısır">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">250₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Kısır</h3>
-          <p class="desc">Kg</p>
-          <div class="meta"><span class="unit">kg</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="salata" data-name="havuç tarator">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">250₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Havuç Tarator</h3>
-          <p class="desc">Kg</p>
-          <div class="meta"><span class="unit">kg</span></div>
-        </div>
-      </div>
-
-      <!-- ========== HAMUR İŞİ ========== -->
-      <div class="card item" data-cat="hamur" data-name="dereotlu poğaça 12 adet">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1604909053197-2b4ac95d299a?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">250₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Dereotlu Poğaça</h3>
-          <p class="desc">12 adet</p>
-          <div class="meta"><span class="unit">12 adet</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="hamur" data-name="gül böreği">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1604909053197-2b4ac95d299a?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">350₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Gül Böreği</h3>
-          <p class="desc">Kg</p>
-          <div class="meta"><span class="unit">kg</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="hamur" data-name="sigara böreği">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1604909053197-2b4ac95d299a?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">350₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Sigara Böreği</h3>
-          <p class="desc">Kg</p>
-          <div class="meta"><span class="unit">kg</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="hamur" data-name="hamburger ekmeği">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">25₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Hamburger Ekmeği</h3>
-          <p class="desc">Adet</p>
-          <div class="meta"><span class="unit">adet</span></div>
-        </div>
-      </div>
-
-      <!-- “Fiyat yok” olanlar (sakallı/pizza/kruvasan/açma/mayalı poğaça/su böreği vb.)
-           İstersen fiyat verince eklerim. Şimdilik “İletişime geçin” etiketi yaptım. -->
-      <div class="card item" data-cat="hamur" data-name="sakallı poğaça pizza poğaça kruvasan poğaça açma mayalı poğaça su böreği">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1604909053197-2b4ac95d299a?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">Fiyat için yazın</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Diğer Hamur İşleri</h3>
-          <p class="desc">Sakallı poğaça • Pizza poğaça • Kruvasan poğaça • Açma çeşitleri • Mayalı poğaça • Peynirli/Kıymalı su böreği</p>
-          <div class="meta"><span class="unit">WhatsApp</span></div>
-        </div>
-      </div>
-
-      <!-- ========== ADET TATLILAR ========== -->
-      <div class="card item" data-cat="adet" data-name="köstebek pasta">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">30₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Köstebek Pasta</h3>
-          <p class="desc">Adet</p>
-          <div class="meta"><span class="unit">adet</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="adet" data-name="cupcake düz kremalı">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">60₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Cupcake (Düz Kremalı)</h3>
-          <p class="desc">Adet</p>
-          <div class="meta"><span class="unit">adet</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="adet" data-name="ekler">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">450₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Ekler</h3>
-          <p class="desc">Kg</p>
-          <div class="meta"><span class="unit">kg</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="adet" data-name="profiterol">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">450₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Profiterol</h3>
-          <p class="desc">Kg</p>
-          <div class="meta"><span class="unit">kg</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="adet" data-name="cheesecake 24 cm frambuaz böğürtlen vişne limon">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1505253216365-594d3f6e98ee?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">950₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Cheesecake</h3>
-          <p class="desc">24 cm kalıp (frambuaz, böğürtlen, vişne, limon)</p>
-          <div class="meta"><span class="unit">24 cm kalıp</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="adet" data-name="rulo pasta muzlu çilekli">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">500₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Rulo Pasta</h3>
-          <p class="desc">Muzlu veya çilekli</p>
-          <div class="meta"><span class="unit">adet</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="adet" data-name="mini cheesecake">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1505253216365-594d3f6e98ee?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">50₺</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Mini Cheesecake</h3>
-          <p class="desc">Adet</p>
-          <div class="meta"><span class="unit">adet</span></div>
-        </div>
-      </div>
-
-      <div class="card item" data-cat="adet" data-name="yaş pasta">
-        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=1600&q=80');">
-          <div class="badge">Fiyat için yazın</div>
-        </div>
-        <div class="body">
-          <h3 class="name">Yaş Pasta</h3>
-          <p class="desc">Kişi sayısına ve modele göre (iletişime geçin)</p>
-          <div class="meta"><span class="unit">WhatsApp</span></div>
-        </div>
-      </div>
-
     </div>
+  </section>
 
-    <footer>
-      © <span id="year"></span> Ev Yapımı Lezzetler • Bu sayfa ücretsiz olarak yayınlanabilir (GitHub Pages).<br/>
-      <span class="small">Kendi fotoğraflarını eklemek istersen “images/…” klasörüyle kolayca değiştiririz.</span>
-    </footer>
-  </div>
+  <!-- HAMUR İŞİ -->
+  <section class="section" id="hamur">
+    <div class="wrap">
+      <h2 class="title">Hamur İşi</h2>
 
-  <script>
-    const q = document.getElementById('q');
-    const chips = document.getElementById('chips');
-    const items = Array.from(document.querySelectorAll('.item'));
-    const countEl = document.getElementById('count');
+      <div class="connected">
+        <div class="node"></div>
+        <div class="grid">
+          <div class="card left">
+            <div class="card__head"><b>Poğaça</b><span>çeşit</span></div>
+            <div class="rows">
+              <div class="row"><div class="item">Sakallı (maydanozlu)</div><div class="price">400₺</div></div>
+              <div class="row"><div class="item">Sakallı (kaşarlı)</div><div class="price">450₺</div></div>
+              <div class="row"><div class="item">Pizza Poğaça</div><div class="price">500₺</div></div>
+              <div class="row"><div class="item">Kruvasan Poğaça</div><div class="price muted">İletişim</div></div>
+              <div class="row"><div class="item">Dereotlu Poğaça <span class="badge">12 adet</span></div><div class="price">250₺</div></div>
+            </div>
+          </div>
 
-    let activeCat = 'all';
+          <div class="card right">
+            <div class="card__head"><b>Börek</b><span>kg / adet</span></div>
+            <div class="rows">
+              <div class="row"><div class="item">Gül Böreği (kg)</div><div class="price">350₺</div></div>
+              <div class="row"><div class="item">Sigara Böreği (kg)</div><div class="price">350₺</div></div>
+              <div class="row"><div class="item">Mini Kruvasan Börek</div><div class="price">450₺</div></div>
+              <div class="row"><div class="item">Peynirli Su Böreği</div><div class="price">700₺</div></div>
+              <div class="row"><div class="item">Kıymalı Su Böreği</div><div class="price">950₺</div></div>
+              <div class="row"><div class="item">Hamburger Ekmeği (adet)</div><div class="price">25₺</div></div>
+              <div class="row"><div class="item">Açma (çeşitleri)</div><div class="price muted">İletişim</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    function apply(){
-      const term = (q.value || '').toLowerCase().trim();
-      let shown = 0;
+  <!-- ADET & KİLOLUK -->
+  <section class="section" id="tatlilar">
+    <div class="wrap">
+      <h2 class="title">Adet & Kiloluk Tatlılar</h2>
 
-      items.forEach(el => {
-        const cat = el.dataset.cat;
-        const name = (el.dataset.name || '').toLowerCase();
-        const matchCat = (activeCat === 'all' || cat === activeCat);
-        const matchText = (!term || name.includes(term));
+      <div class="connected">
+        <div class="node"></div>
+        <div class="grid">
+          <div class="card left">
+            <div class="card__head"><b>Adet</b><span>tatlı</span></div>
+            <div class="rows">
+              <div class="row"><div class="item">Köstebek Pasta (adet)</div><div class="price">40₺</div></div>
+              <div class="row"><div class="item">Düz Cupcake (adet)</div><div class="price">40₺</div></div>
+              <div class="row"><div class="item">Cupcake Kremalı (adet)</div><div class="price">60₺</div></div>
+              <div class="row">
+                <div>
+                  <div class="item">Cupcake Dolgulu Kremalı (adet)</div>
+                  <div class="note">Frambuaz / çikolata / beyaz çikolata dolgulu</div>
+                </div>
+                <div class="price">65₺</div>
+              </div>
+              <div class="row"><div class="item">Mini Cheesecake (adet)</div><div class="price">70₺</div></div>
+            </div>
+          </div>
 
-        const ok = matchCat && matchText;
-        el.style.display = ok ? '' : 'none';
-        if(ok) shown++;
-      });
+          <div class="card right">
+            <div class="card__head"><b>Kiloluk</b><span>kg / kalıp</span></div>
+            <div class="rows">
+              <div class="row"><div class="item">Ekler (kg)</div><div class="price">550₺</div></div>
+              <div class="row"><div class="item">Profiterol (kg)</div><div class="price">550₺</div></div>
+              <div class="row">
+                <div>
+                  <div class="item">Cheesecake (24 cm kalıp)</div>
+                  <div class="note">Frambuaz / böğürtlen / vişne / limon</div>
+                </div>
+                <div class="price">950₺</div>
+              </div>
+              <div class="row"><div class="item">Rulo Pasta (muzlu veya çilekli)</div><div class="price">500₺</div></div>
+	<div class="row"><div class="item">Yaş Pasta</div><div class="note">Kişi sayısı ve modele göre fiyat için iletişime geçin.</div>
+            </div>
+		
+                </div>
+          </div>
 
-      countEl.textContent = `${shown} ürün gösteriliyor`;
-    }
+          <div class="card span12 left">
+            <div class="card__head"><b>İletişim</b><span>sipariş</span></div>
+            <div class="rows">
+              <div class="row">               
+                <div class="price muted">İletişim</div>
+              </div>
+            </div>
 
-    chips.addEventListener('click', (e) => {
-      const chip = e.target.closest('.chip');
-      if(!chip) return;
-      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      activeCat = chip.dataset.cat;
-      apply();
-    });
+            <div class="cta">
+              <!-- Buraya WhatsApp/Instagram linklerini sonradan ekleriz -->
+              <a class="btn" href="#" aria-label="İletişim">
+                <span class="icon"></span> WhatsApp / Instagram ile İletişim
+              </a>
+            </div>
 
-    q.addEventListener('input', apply);
+            <div style="height:12px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    document.getElementById('year').textContent = new Date().getFullYear();
-    apply();
-  </script>
+  <footer class="wrap">
+    © Lezzet Atölyesi • Fiyatlar dönemsel güncellenebilir.
+  </footer>
 </body>
 </html>
