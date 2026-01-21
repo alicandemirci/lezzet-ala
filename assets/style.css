@@ -1,61 +1,5 @@
 /* Bu dosyaya CSS’i taşıyoruz (GitHub Pages için ideal) */
 
-/* not: index.html'de style yok, burası tek kaynak */
-/* ===== Yatay Galeri (tek satır, düzgün ölçü) ===== */
-.gallery{
-  display:flex;
-  gap:12px;
-  overflow-x:auto;
-  padding: 6px 2px 10px;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;            /* Firefox */
-}
-.gallery::-webkit-scrollbar{ display:none; } /* Chrome */
-
-.shot{
-  flex: 0 0 220px;                  /* kart genişliği */
-  scroll-snap-align: start;
-  margin:0;
-  border-radius: 18px;
-  overflow:hidden;
-  border:1px solid rgba(11,31,54,.12);
-  background: rgba(255,255,255,.72);
-  box-shadow: 0 10px 24px rgba(11,31,54,.08);
-}
-
-.shot img{
-  width:100%;
-  height: 150px;                    /* hepsi aynı yükseklik */
-  object-fit: cover;                /* oran farkını kırpar, güzel görünür */
-  object-position: center;          /* merkezi korur */
-  display:block;
-  background: rgba(11,31,54,.04);   /* yüklenirken hoş dursun */
-}
-
-.shot figcaption{
-  padding:10px 12px;
-  font-weight:800;
-  font-size:12px;
-  letter-spacing:.06em;
-  color: rgba(11,31,54,.74);
-  text-transform: uppercase;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Tablet */
-@media (max-width: 980px){
-  .shot{ flex-basis: 200px; }
-  .shot img{ height: 150px; }
-}
-
-/* Mobil: daha büyük kartlar, daha kolay kaydırma */
-@media (max-width: 520px){
-  .shot{ flex-basis: 78vw; }        /* neredeyse tam ekran */
-  .shot img{ height: 190px; }
-}
 
 :root{
   --bg:#f6f1ea;
@@ -383,59 +327,6 @@ footer{
   .span12::after{display:none;}
 }
 
-/* ===== Üst Galeri ===== */
-.section--gallery{ padding-top: 10px; }
-.title--sm{ font-size: 28px; margin: 18px 0 10px; }
-.gallery-head{ text-align:center; margin-bottom: 12px; }
-
-.gallery{
-  display:grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap:12px;
-  margin-top: 10px;
-}
-
-.shot{
-  margin:0;
-  border-radius: 18px;
-  overflow:hidden;
-  border:1px solid rgba(11,31,54,.12);
-  background: rgba(255,255,255,.72);
-  box-shadow: 0 10px 24px rgba(11,31,54,.08);
-}
-
-.shot img{
-  width:100%;
-  height: 140px;
-  object-fit: cover;
-  display:block;
-}
-
-.shot figcaption{
-  padding:10px 12px;
-  font-weight:800;
-  font-size:12px;
-  letter-spacing:.06em;
-  color: rgba(11,31,54,.74);
-  text-transform: uppercase;
-}
-
-@media (max-width: 980px){
-  .gallery{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .shot img{ height: 150px; }
-}
-@media (max-width: 520px){
-  /* Mobilde kaydırmalı mini galeri hissi */
-  .gallery{
-    grid-auto-flow: column;
-    grid-auto-columns: 74%;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 6px;
-  }
-  .shot{ scroll-snap-align: start; }
-  .shot img{ height: 170px; }
-}
 
 /* ===== Satır içi açılır foto ===== */
 .row--has-photo{
@@ -486,12 +377,16 @@ footer{
   .row-photo img{ height: 190px; }
 }
 
-/* === GALERİ FIX (EN ALTA KOY) === */
+/* ===== GALERİ (TEK SATIR YATAY) ===== */
+.section--gallery{ padding-top: 10px; }
+.title--sm{ font-size: 28px; margin: 18px 0 10px; }
+.gallery-head{ text-align:center; margin-bottom: 12px; }
+
 .gallery{
-  display:flex !important;
-  gap:12px !important;
-  overflow-x:auto !important;
-  padding: 6px 2px 10px !important;
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+  padding: 6px 2px 10px;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -499,7 +394,7 @@ footer{
 .gallery::-webkit-scrollbar{ display:none; }
 
 .shot{
-  flex: 0 0 220px !important;
+  flex: 0 0 220px;
   scroll-snap-align: start;
   margin:0;
   border-radius: 18px;
@@ -510,14 +405,33 @@ footer{
 }
 
 .shot img{
-  width:100% !important;
-  height:150px !important;
-  object-fit:cover !important;
-  object-position:center !important;
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  object-position:center;
   display:block;
+  background: rgba(11,31,54,.04);
 }
 
-@media (max-width:520px){
-  .shot{ flex-basis: 78vw !important; }
-  .shot img{ height:190px !important; }
+.shot figcaption{
+  padding:10px 12px;
+  font-weight:800;
+  font-size:12px;
+  letter-spacing:.06em;
+  color: rgba(11,31,54,.74);
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Tablet */
+@media (max-width: 980px){
+  .shot{ flex-basis: 200px; }
+}
+
+/* Mobil */
+@media (max-width: 520px){
+  .shot{ flex-basis: 78vw; }
+  .shot img{ height:190px; }
 }
