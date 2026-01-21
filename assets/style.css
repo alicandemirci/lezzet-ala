@@ -377,7 +377,7 @@ footer{
   .row-photo img{ height: 190px; }
 }
 
-/* === GALERİ FIX (KÜÇÜK BOY) — EN ALTA KOY === */
+/* === GALERİ FIX (KÜÇÜK) — EN ALTA KOY === */
 .gallery{
   display:flex !important;
   gap:10px !important;
@@ -390,33 +390,32 @@ footer{
 .gallery::-webkit-scrollbar{ display:none; }
 
 .shot{
-  flex: 0 0 170px !important;     /* 220 -> 170 */
+  flex: 0 0 150px !important;     /* 220 -> 150 */
   scroll-snap-align: start;
   margin:0;
-  border-radius: 16px;
+  border-radius: 14px !important; /* 18 -> 14 */
   overflow:hidden;
   border:1px solid rgba(11,31,54,.12);
   background: rgba(255,255,255,.72);
-  box-shadow: 0 8px 18px rgba(11,31,54,.08);
+  box-shadow: 0 8px 16px rgba(11,31,54,.08) !important;
 }
 
 .shot img{
   width:100% !important;
-  height:110px !important;        /* 150 -> 110 */
+  height:95px !important;         /* 150 -> 95 */
   object-fit:cover !important;
   object-position:center !important;
   display:block;
 }
 
 .shot figcaption{
-  padding:8px 10px;
-  font-size:11px;
-  letter-spacing:.06em;
+  padding:7px 9px !important;
+  font-size:10.5px !important;
 }
 
-/* Mobil: yine güzel büyük dursun ama abartmasın */
+/* Mobil: büyük dursun ama abartmasın */
 @media (max-width:520px){
-  .shot{ flex-basis: 70vw !important; }   /* 78vw -> 70vw */
-  .shot img{ height:160px !important; }   /* 190 -> 160 */
+  .shot{ flex-basis: 62vw !important; }  /* 78vw -> 62vw */
+  .shot img{ height:150px !important; }  /* 190 -> 150 */
 }
 
