@@ -485,3 +485,39 @@ footer{
 @media (max-width: 520px){
   .row-photo img{ height: 190px; }
 }
+
+/* === GALERİ FIX (EN ALTA KOY) === */
+.gallery{
+  display:flex !important;
+  gap:12px !important;
+  overflow-x:auto !important;
+  padding: 6px 2px 10px !important;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.gallery::-webkit-scrollbar{ display:none; }
+
+.shot{
+  flex: 0 0 220px !important;
+  scroll-snap-align: start;
+  margin:0;
+  border-radius: 18px;
+  overflow:hidden;
+  border:1px solid rgba(11,31,54,.12);
+  background: rgba(255,255,255,.72);
+  box-shadow: 0 10px 24px rgba(11,31,54,.08);
+}
+
+.shot img{
+  width:100% !important;
+  height:150px !important;
+  object-fit:cover !important;
+  object-position:center !important;
+  display:block;
+}
+
+@media (max-width:520px){
+  .shot{ flex-basis: 78vw !important; }
+  .shot img{ height:190px !important; }
+}
