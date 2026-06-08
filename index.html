@@ -9,690 +9,367 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-
-  <style>
-    :root{
-      /* Logo uyumlu soft palet */
-      --bg:#f6f1ea;         /* bej */
-      --paper:#ffffff;
-      --paper2:#fbfaf8;
-      --ink:#0b1f36;
-
-      --sage:#87957a;
-      --rose:#e6b9b2;
-      --navy:#0b2238;
-
-      --line:rgba(11,31,54,.16);
-      --line2:rgba(11,31,54,.10);
-      --shadow:0 14px 38px rgba(11,31,54,.10);
-
-      --radius:22px;
-      --max:1120px;
-    }
-
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--ink);
-      background:
-        radial-gradient(1100px 650px at 18% 10%, rgba(230,185,178,.22), transparent 55%),
-        radial-gradient(900px 520px at 86% 16%, rgba(135,149,122,.20), transparent 55%),
-        radial-gradient(900px 620px at 35% 95%, rgba(11,31,54,.06), transparent 60%),
-        var(--bg);
-    }
-    a{color:inherit}
-    .wrap{width:min(var(--max), 92vw); margin:0 auto}
-    .muted{opacity:.78}
-
-    /* Background leaf sketch (çok hafif) */
-    .leafwash{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      opacity:.10;
-      mix-blend-mode:multiply;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900' viewBox='0 0 900 900'%3E%3Cg fill='none' stroke='%230b1f36' stroke-opacity='.45' stroke-width='1.4'%3E%3Cpath d='M120 640c120-90 210-240 190-410'/%3E%3Cpath d='M170 700c180-120 280-360 250-560'/%3E%3Cpath d='M760 690c-120-160-90-420 120-560'/%3E%3Cpath d='M710 630c-90-120-60-310 90-420'/%3E%3C/g%3E%3C/svg%3E");
-      background-size: 880px 880px;
-      background-position: 50% 20%;
-    }
-
-    /* Header */
-    header{padding:54px 0 18px; text-align:center}
-    .brand{
-      display:inline-flex;
-      align-items:center;
-      gap:16px;
-      padding:18px 22px;
-      border-radius:18px;
-      background:rgba(255,255,255,.78);
-      border:1px solid rgba(11,31,54,.12);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(6px);
-    }
-    .brand img{
-      width:62px;height:62px;border-radius:50%;
-      object-fit:cover;
-      border:1px solid rgba(11,31,54,.14);
-      background:#fff;
-    }
-    .brand .name{
-      font-family:"Playfair Display", serif;
-      font-weight:600;
-      font-size:30px;
-      letter-spacing:.02em;
-      line-height:1.05;
-    }
-    .brand .sub{
-      margin-top:4px;
-      font-size:12px;
-      letter-spacing:.14em;
-      font-weight:800;
-      color:rgba(11,31,54,.66);
-    }
-    .topnote{
-      margin:12px auto 0;
-      width:min(820px, 92vw);
-      font-size:13px;
-      color:rgba(11,31,54,.74);
-    }
-
-    /* Mini navigation (çok minimal) */
-    .nav{
-      margin:18px auto 0;
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      gap:10px;
-      width:min(980px, 92vw);
-    }
-    .nav a{
-      text-decoration:none;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.06em;
-      padding:10px 12px;
-      border-radius:999px;
-      background:rgba(255,255,255,.65);
-      border:1px solid rgba(11,31,54,.10);
-      color:rgba(11,31,54,.74);
-      transition:transform .12s ease, background .12s ease;
-    }
-    .nav a:hover{transform:translateY(-1px); background:rgba(255,255,255,.86)}
-
-    /* Sections */
-    .section{padding:26px 0 10px}
-    .title{
-      margin:26px 0 14px;
-      text-align:center;
-      font-family:"Playfair Display", serif;
-      font-weight:600;
-      letter-spacing:.02em;
-      font-size:34px;
-    }
-    .subtitle{
-      text-align:center;
-      margin:-6px auto 14px;
-      font-size:13px;
-      color:rgba(11,31,54,.70);
-      width:min(780px, 92vw);
-    }
-
-    /* CONNECTED LAYOUT (omurga + node + connector) */
-    .connected{
-      position:relative;
-      padding:10px 0 0;
-    }
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap:18px;
-      align-items:stretch;
-    }
-
-    /* Spine (dikey omurga) - masaüstünde orta */
-    .connected::before{
-      content:"";
-      position:absolute;
-      top:0;
-      bottom:0;
-      left:50%;
-      transform:translateX(-50%);
-      width:2px;
-      background:linear-gradient(
-        to bottom,
-        transparent,
-        rgba(135,149,122,.55),
-        rgba(230,185,178,.55),
-        transparent
-      );
-      border-radius:999px;
-      opacity:.75;
-    }
-
-    /* Card */
-    .card{
-      grid-column: span 6;
-      border-radius: var(--radius);
-      background:rgba(255,255,255,.82);
-      border:1px solid rgba(11,31,54,.12);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-      min-height: 100%;
-    }
-
-    /* Connector line from spine to card */
-    .card::after{
-      content:"";
-      position:absolute;
-      top:22px;
-      height:2px;
-      width:72px;
-      background:linear-gradient(90deg, rgba(135,149,122,.0), rgba(135,149,122,.55), rgba(230,185,178,.55));
-      opacity:.9;
-    }
-    /* left column cards connect from center to left */
-    .card.left::after{
-      right:-72px;
-      transform:translateX(0);
-    }
-    /* right column cards connect from center to right */
-    .card.right::after{
-      left:-72px;
-      transform:translateX(0);
-      background:linear-gradient(90deg, rgba(230,185,178,.55), rgba(135,149,122,.55), rgba(135,149,122,.0));
-    }
-
-    /* Node (spine üzerindeki düğüm) */
-    .node{
-      position:absolute;
-      top:16px;
-      width:14px;height:14px;border-radius:50%;
-      left:50%;
-      transform:translateX(-50%);
-      background:var(--paper);
-      border:1px solid rgba(11,31,54,.14);
-      box-shadow:
-        0 0 0 6px rgba(230,185,178,.18),
-        0 0 0 12px rgba(135,149,122,.10);
-      z-index:3;
-    }
-    /* card header */
-    .card__head{
-      padding:14px 16px 10px;
-      background:linear-gradient(180deg, rgba(11,34,56,.06), rgba(11,34,56,0));
-      display:flex;
-      align-items:baseline;
-      justify-content:space-between;
-      gap:12px;
-    }
-    .card__head b{
-      font-size:12px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      color:rgba(11,31,54,.70);
-    }
-    .card__head span{
-      font-size:12px;
-      color:rgba(11,31,54,.58);
-      font-weight:700;
-    }
-
-    .rows{padding:6px 14px 12px}
-    .row{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      padding:10px 4px;
-      border-bottom:1px dashed rgba(11,31,54,.18);
-    }
-    .row:last-child{border-bottom:none}
-
-    .item{font-weight:650; font-size:14px; line-height:1.25rem; color:rgba(11,31,54,.92)}
-    .price{font-weight:850; white-space:nowrap; font-size:14px; color:var(--navy)}
-    .note{font-size:12px; color:rgba(11,31,54,.66); margin-top:2px}
-
-    .badge{
-      display:inline-block;
-      margin-left:8px;
-      font-size:11px;
-      font-weight:850;
-      letter-spacing:.06em;
-      padding:4px 8px;
-      border-radius:999px;
-      border:1px solid rgba(11,31,54,.14);
-      background:rgba(11,31,54,.04);
-      color:rgba(11,31,54,.72);
-      vertical-align:middle;
-    }
-
-    /* Full width card */
-    .span12{grid-column: span 12}
-
-    /* CTA */
-    .cta{
-      margin:14px 0 0;
-      display:flex;
-      justify-content:center;
-    }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:12px 16px;
-      border-radius:14px;
-      text-decoration:none;
-      font-weight:850;
-      letter-spacing:.02em;
-      background:rgba(11,31,54,.06);
-      border:1px solid rgba(11,31,54,.14);
-      color:var(--ink);
-    }
-    .btn .icon{
-      width:10px;height:10px;border-radius:50%;
-      background:var(--sage);
-      box-shadow:0 0 0 4px rgba(135,149,122,.18);
-    }
-
-    footer{
-      padding:30px 0 50px;
-      text-align:center;
-      font-size:12px;
-      color:rgba(11,31,54,.68);
-    }
-
-    /* Mobile: spine solda, kartlar tek kolon, bağlantı daha kısa */
-    @media (max-width: 900px){
-      .grid{gap:14px}
-      .card{grid-column: span 12;}
-      .title{font-size:30px}
-
-      .connected::before{
-        left:18px;
-        transform:none;
-      }
-      .node{
-        left:18px;
-        transform:none;
-      }
-      .card::after{
-        left:18px;
-        width:26px;
-        background:linear-gradient(90deg, rgba(230,185,178,.55), rgba(135,149,122,.55));
-      }
-      .card.left::after,
-      .card.right::after{left:18px}
-    }
-  </style>
+  <link rel="stylesheet" href="assets/style.css">
 </head>
 
 <body>
-  <div class="leafwash"></div>
+  <div class="leafwash" aria-hidden="true"></div>
 
-  <div class="wrap">
-    <header>
+  <header class="site-header" id="top">
+    <div class="wrap">
       <div class="brand">
-        <img src="images/logo.png" alt="Lezzet Atölyesi Logo" />
-        <div>
-          <div class="name">Lezzet Atölyesi</div>
-          <div class="sub">FİYAT LİSTESİ</div>
+        <img class="brand__logo" src="images/logo.png" alt="Lezzet Atölyesi Logo" />
+        <div class="brand__text">
+          <div class="brand__name">Lezzet Atölyesi</div>
+          <div class="brand__sub">FİYAT LİSTESİ</div>
         </div>
       </div>
-		<section class="section section--gallery" id="galeri">
-  <div class="wrap">
-    <div class="gallery-head">
-      <h2 class="title title--sm">Öne Çıkan Lezzetler</h2>
-      <p class="subtitle">Fotoğrafı olan ürünlerden seçmece</p>
+
+      <p class="topnote">
+        Ev yapımı tatlı & tuzlu çeşitleri. Sipariş ve detaylar için Instagram’dan ulaşabilirsiniz.
+      </p>
     </div>
 
-    <div class="gallery">
-      <!-- sadece elindeki en iyi fotoğrafları koy -->
-      <figure class="shot">
-        <img src="images/products/manti.jpg" alt="Mantı" loading="lazy">
-        <figcaption>Mantı</figcaption>
-      </figure>
-
-      <figure class="shot">
-        <img src="images/products/sarma.jpg" alt="Yaprak sarması" loading="lazy">
-        <figcaption>Yaprak Sarması</figcaption>
-      </figure>
-
-      <figure class="shot">
-        <img src="images/products/trilece.jpg" alt="Trileçe" loading="lazy">
-        <figcaption>Trileçe</figcaption>
-      </figure>
-
-      <figure class="shot">
-        <img src="images/products/magnolya.jpg" alt="Magnolya" loading="lazy">
-        <figcaption>Magnolya</figcaption>
-      </figure>
-
-      <figure class="shot">
-        <img src="images/products/kurabiye.jpg" alt="Kurabiye" loading="lazy">
-        <figcaption>Kurabiye</figcaption>
-      </figure>
-
-      <figure class="shot">
-        <img src="images/products/icli_kofte.jpg" alt="İçli köfte" loading="lazy">
-        <figcaption>İçli Köfte</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-      <div class="topnote muted">
-        Ev yapımı tatlı & tuzlu çeşitleri. Siparişler için iletişime geçebilirsiniz.
-      </div>
-
-      <nav class="nav" aria-label="Kategori menüsü">
-        <a href="#urunler">Ürünler</a>
+    <nav class="nav" aria-label="Kategori menüsü">
+      <div class="nav__inner">
+        <!--<a href="#urunler">Ürünler</a>-->
         <a href="#kurabiyeler">Kurabiyeler</a>
         <a href="#borcam">Borcam Tatlıları</a>
-        <a href="#bardak">Bardak Tatlıları</a>
+        <!--<a href="#bardak">Bardak Tatlıları</a>-->
         <a href="#salatalar">Salatalar</a>
         <a href="#hamur">Hamur İşi</a>
         <a href="#tatlilar">Adet & Kiloluk</a>
-      </nav>
-    </header>
-  </div>
+      </div>
+    </nav>
+  </header>
 
-	
+  <main>
+    <!-- ÜRÜNLER -->
+    <section class="section" id="urunler">
+      <div class="wrap">
+       <!-- <h2 class="title">Ürünler</h2>-->
 
-  <!-- ÜRÜNLER -->
-  <section class="section" id="urunler">
-    <div class="wrap">
-      <h2 class="title">Ürünler</h2>
+        <div class="connected">
+          <div class="node" aria-hidden="true"></div>
 
-      <div class="connected">
-        <div class="node"></div>
-        <div class="grid">
-          <div class="card left">
-            <div class="card__head"><b>Ev Yapımı</b><span>kg / adet</span></div>
-            <div class="rows">
-              <div class="row"><div class="item">Mantı (kg)</div><div class="price">550₺</div></div>
-              <div class="row"><div class="item">Pelmeni Mantı (kg)</div><div class="price">550₺</div></div>
-              <div class="row">
-                <div>
-                  <div class="item">Yaprak Sarması (kg)</div>
-                  <div class="note">Pişmiş: 550₺</div>
+          <div class="grid">
+            <article class="card left">
+              <header class="card__head">
+                <b>Ev Yapımı</b><span>kg / adet</span>
+              </header>
+              <div class="rows">
+                <div class="row"><div class="item">Mantı </div><div class="price">650₺</div></div>
+                <div class="row"><div class="item">Pelmeni Mantı </div><div class="price">650₺</div></div>
+
+                <div class="row">
+                  <div>
+                    <div class="item">Yaprak Sarması </div>
+                    <!--<div class="note">Pişmiş: 550₺</div>-->
+                  </div>
+                  <div class="price">600₺</div>
                 </div>
-                <div class="price">500₺</div>
-              </div>
-              <div class="row">
-                <div>
-                  <div class="item">İçli Köfte (adet)</div>
-                  <div class="note">Kızarmış: 65₺</div>
-                </div>
-                <div class="price">60₺</div>
-              </div>
-            </div>
-          </div>
 
-          <div class="card right">
-            <div class="card__head"><b>Makarna</b><span>kg</span></div>
-            <div class="rows">
-              <div class="row"><div class="item">Erişte (kg)</div><div class="price">250₺</div></div>
-              <div class="row"><div class="item">Sebzeli Erişte (kg)</div><div class="price">300₺</div></div>
-            </div>
+                <div class="row">
+                  <div>
+                    <div class="item">İçli Köfte (adet)</div>
+                    <div class="note">Kızarmış: 75₺</div>
+                  </div>
+                  <div class="price">70₺</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="card right">
+              <header class="card__head">
+                <b>Makarna</b><span>kg</span>
+              </header>
+              <div class="rows">
+                <div class="row"><div class="item">Erişte </div><div class="price">400₺</div></div>
+                <div class="row"><div class="item">Sebzeli Erişte </div><div class="price">450₺</div></div>
+              </div>
+            </article>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- KURABİYELER -->
-  <section class="section" id="kurabiyeler">
-    <div class="wrap">
-      <h2 class="title">Kurabiyeler</h2>
-      <div class="subtitle">Tepsi fiyatları — adet bilgileri rozet içinde.</div>
+    <!-- KURABİYELER -->
+    <section class="section" id="kurabiyeler">
+      <div class="wrap">
+        <h2 class="title">Kurabiyeler</h2>
+        <p class="subtitle">Tepsi fiyatları</p>
 
-      <div class="connected">
-        <div class="node"></div>
-        <div class="grid">
-          <div class="card left">
-            <div class="card__head"><b>Tepsi</b><span>klasikler</span></div>
-            <div class="rows">
-              <div class="row"><div class="item">Hindistan Cevizli <span class="badge">50 adet</span></div><div class="price">400₺</div></div>
-              <div class="row"><div class="item">Damla Çikolatalı <span class="badge">50 adet</span></div><div class="price">400₺</div></div>
-              <div class="row"><div class="item">Un Kurabiyesi</div><div class="price">400₺</div></div>
-              <div class="row"><div class="item">Elmalı Kurabiye</div><div class="price">400₺</div></div>
-              <div class="row"><div class="item">Mısır Gevrekli</div><div class="price">400₺</div></div>
-              <div class="row"><div class="item">Tuzlu Kurabiye (çeşitleri)</div><div class="price">400₺</div></div>
-            </div>
-          </div>
+        <div class="connected">
+          <div class="node" aria-hidden="true"></div>
 
-          <div class="card right">
-            <div class="card__head"><b>Tepsi</b><span>özel</span></div>
-            <div class="rows">
-              <div class="row"><div class="item">Çikolatalı Fındıklı Cookie <span class="badge">17–18 adet</span></div><div class="price">600₺</div></div>
-              <div class="row">
-                <div>
-                  <div class="item">Browni Kurabiye</div>
-                  <div class="note">Ortalama 900 gr (35 adet)</div>
-                </div>
-                <div class="price">400₺</div>
+          <div class="grid">
+            <article class="card left">
+              <header class="card__head"><b>Tepsi</b><span>klasikler</span></header>
+              <div class="rows">
+                <div class="row"><div class="item">Hindistan Cevizli</div><div class="price">400₺</div></div>
+                <div class="row"><div class="item">Damla Çikolatalı</div><div class="price">400₺</div></div>
+                <div class="row"><div class="item">Un Kurabiyesi</div><div class="price">400₺</div></div>
+                <div class="row"><div class="item">Elmalı Kurabiye</div><div class="price">400₺</div></div>
+                <div class="row"><div class="item">Mısır Gevrekli</div><div class="price">400₺</div></div>
+                <div class="row"><div class="item">Tuzlu Kurabiye (çeşitleri)</div><div class="price">400₺</div></div>
               </div>
-              <div class="row"><div class="item">Kakaolu Çikolatalı Çatlak</div><div class="price">400₺</div></div>
-              <div class="row"><div class="item">Hatay Kömbesi</div><div class="price">400₺</div></div>
-              <div class="row"><div class="item">Çörekotlu Kurabiye</div><div class="price">400₺</div></div>
-              <div class="row"><div class="item">Kokoş Kurabiye</div><div class="price">400₺</div></div>
-            </div>
+            </article>
+
+            <article class="card right">
+              <header class="card__head"><b>Tepsi</b><span>özel</span></header>
+              <div class="rows">
+                <div class="row"><div class="item">Çikolatalı Fındıklı Cookie</div><div class="price">600₺</div></div>
+                <div class="row"><div class="item">Browni Kurabiye</div><div class="price">400₺</div></div>
+                <div class="row"><div class="item">Kakaolu Çatlak Kurabiye</div><div class="price">400₺</div></div>
+                <div class="row"><div class="item">Limonlu Çatlak Kurabiye</div><div class="price">400₺</div></div>
+                <div class="row"><div class="item">Çörekotlu Kurabiye</div><div class="price">400₺</div></div>
+                <div class="row"><div class="item">Kokoş Kurabiye</div><div class="price">400₺</div></div>
+              </div>
+            </article>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
   <!-- BORCAM -->
-  <section class="section" id="borcam">
-    <div class="wrap">
-      <h2 class="title">Borcam Tatlıları</h2>
+    <section class="section" id="borcam">
+      <div class="wrap">
+        <h2 class="title">Borcam Tatlıları</h2>
 
-      <div class="connected">
-        <div class="node"></div>
-        <div class="grid">
-          <div class="card left">
-            <div class="card__head"><b>Borcam</b><span>tepsi</span></div>
-            <div class="rows">
-              <div class="row"><div class="item">Trileçe (frambuazlı / karamelli)</div><div class="price">700₺</div></div>
-              <div class="row"><div class="item">Tiramisu</div><div class="price">700₺</div></div>
-              <div class="row"><div class="item">Kumlu Pasta</div><div class="price">700₺</div></div>
-              <div class="row"><div class="item">Islak Kek (tepsi)</div><div class="price">450₺</div></div>
-              <div class="row"><div class="item">Ağlayan Pasta (tepsi)</div><div class="price">450₺</div></div>
-            </div>
-          </div>
+        <div class="connected">
+          <div class="node" aria-hidden="true"></div>
 
-          <div class="card right">
-            <div class="card__head"><b>Borcam</b><span>özel</span></div>
-            <div class="rows">
-              <div class="row"><div class="item">Kıbrıs Tatlısı (tepsi)</div><div class="price">700₺</div></div>
-              <div class="row"><div class="item">Frambuazlı Kremalı Beyaz Çikolatalı Borcam Pastası</div><div class="price">850₺</div></div>
-              <div class="row"><div class="item">Mozaik Pasta (portakallı / sade)</div><div class="price">300₺</div></div>
-              <div class="row"><div class="item">Kek Çeşitleri (1 kalıp)</div><div class="price">400₺</div></div>
-            </div>
+          <div class="grid">
+            <article class="card left">
+              <header class="card__head"><b>Borcam</b></header>
+              <div class="rows">
+                <div class="row"><div class="item">Trileçe (frambuazlı / karamelli)</div><div class="price">900₺</div></div>
+                <div class="row"><div class="item">Tiramisu</div><div class="price">900₺</div></div>
+                <div class="row"><div class="item">Kumlu Pasta</div><div class="price">700₺</div></div>
+                <div class="row"><div class="item">Islak Kek </div><div class="price">700₺</div></div>
+                <div class="row"><div class="item">Ağlayan Pasta </div><div class="price">700₺</div></div>
+              </div>
+            </article>
+
+            <article class="card right">
+              <header class="card__head"><b>Borcam</b></header>
+              <div class="rows">
+                <div class="row"><div class="item">Haşhaşlı Revani</div><div class="price">600₺</div></div>
+                <div class="row"><div class="item">Kıbrıs Tatlısı </div><div class="price">850₺</div></div>
+                <div class="row"><div class="item">Frambuazlı Kremalı Beyaz Çikolatalı Borcam Pastası</div><div class="price">1000₺</div></div>
+                <div class="row"><div class="item">Mozaik Pasta (portakallı / sade)</div><div class="price">400₺</div></div>
+                <div class="row"><div class="item">Kek Çeşitleri (1 kalıp)</div><div class="price">400₺</div></div>
+              </div>
+            </article>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- BARDAK -->
-  <section class="section" id="bardak">
-    <div class="wrap">
-      <h2 class="title">Bardak Tatlıları</h2>
+    <!-- BARDAK -->
+    <!--<section class="section" id="bardak">--
+      <div class="wrap">
+        <h2 class="title">Bardak Tatlıları</h2>
 
-      <div class="connected">
-        <div class="node"></div>
-        <div class="grid">
-          <div class="card left">
-            <div class="card__head"><b>Adet</b><span>bardak</span></div>
-            <div class="rows">
-              <div class="row"><div class="item">Magnolya (adet)</div><div class="price">75₺</div></div>
-              <div class="row"><div class="item">Cup Tiramisu (adet)</div><div class="price">75₺</div></div>
-              <div class="row"><div class="item">Tartolet</div><div class="price muted">İletişim</div></div>
-            </div>
-          </div>
+        <div class="connected">
+          <div class="node" aria-hidden="true"></div>
 
-          <div class="card right">
-            <div class="card__head"><b>Not</b><span>bilgi</span></div>
-            <div class="rows">
-              <div class="row">
-                <div>
-                  <div class="item">Tartolet</div>
-                  <div class="note">Adet / boy bilgisine göre fiyatlandırılır.</div>
-                </div>
-                <div></div>
+          <div class="grid">
+            <article class="card span12 left">
+              <header class="card__head"><b>Adet</b><span>bardak</span></header>
+              <div class="rows">
+                <div class="row"><div class="item">Magnolya (adet)</div><div class="price">75₺</div></div>
+                <div class="row"><div class="item">Cup Tiramisu (adet)</div><div class="price">75₺</div></div>
               </div>
-              <div class="row">
-                <div>
-                  <div class="item">Yaş Pasta</div>
-                  <div class="note">Kişi sayısı ve modele göre fiyat için iletişime geçin.</div>
-                </div>
-                <div class="price muted">İletişim</div>
-              </div>
-            </div>
+            </article>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+   <!-- </section> -->
 
-  <!-- SALATALAR -->
-  <section class="section" id="salatalar">
-    <div class="wrap">
-      <h2 class="title">Salatalar</h2>
+  
 
-      <div class="connected">
-        <div class="node"></div>
-        <div class="grid">
-          <div class="card left">
-            <div class="card__head"><b>Salata</b><span>kg</span></div>
-            <div class="rows">
-              <div class="row"><div class="item">Arpa Şehriye (yoğurtlu) (kg)</div><div class="price">250₺</div></div>
-              <div class="row"><div class="item">Makarna (yoğurtlu) (kg)</div><div class="price">250₺</div></div>
-              <div class="row"><div class="item">Brokoli</div><div class="price">300₺</div></div>
-              <div class="row"><div class="item">Patates</div><div class="price">250₺</div></div>
-            </div>
-          </div>
+    <!-- SALATALAR -->
+    <section class="section" id="salatalar">
+      <div class="wrap">
+        <h2 class="title">Salatalar</h2>
 
-          <div class="card right">
-            <div class="card__head"><b>Salata</b><span>kg</span></div>
-            <div class="rows">
-              <div class="row"><div class="item">Mercimek Köftesi (kg)</div><div class="price">300₺</div></div>
-              <div class="row"><div class="item">Kısır (kg)</div><div class="price">250₺</div></div>
-              <div class="row"><div class="item">Havuç Tarator</div><div class="price">250₺</div></div>
-            </div>
+        <div class="connected">
+          <div class="node" aria-hidden="true"></div>
+
+          <div class="grid">
+            <article class="card left">
+              <header class="card__head"><b>Salata</b><span>kg</span></header>
+              <div class="rows">
+                <div class="row"><div class="item">Yoğurtlu Arpa Şehriye Salatası</div><div class="price">350₺</div></div>
+                <div class="row"><div class="item">Yoğurtlu Makarna Salatası</div><div class="price">350₺</div></div>
+                <div class="row"><div class="item">Brokoli Salatası</div><div class="price">300₺</div></div>
+                <div class="row"><div class="item">Patates Salatası</div><div class="price">300₺</div></div>
+              </div>
+            </article>
+
+            <article class="card right">
+              <header class="card__head"><b>Salata</b><span>kg</span></header>
+              <div class="rows">
+                <div class="row"><div class="item">Mercimek Köftesi</div><div class="price">350₺</div></div>
+                <div class="row"><div class="item">Kısır </div><div class="price">350₺</div></div>
+                <div class="row"><div class="item">Havuç Tarator</div><div class="price">300₺</div></div>
+              </div>
+            </article>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- HAMUR İŞİ -->
-  <section class="section" id="hamur">
-    <div class="wrap">
-      <h2 class="title">Hamur İşi</h2>
+    <!-- HAMUR -->
+    <section class="section" id="hamur">
+      <div class="wrap">
+        <h2 class="title">Hamur İşi</h2>
 
-      <div class="connected">
-        <div class="node"></div>
-        <div class="grid">
-          <div class="card left">
-            <div class="card__head"><b>Poğaça</b><span>çeşit</span></div>
-            <div class="rows">
-              <div class="row"><div class="item">Sakallı (maydanozlu)</div><div class="price">400₺</div></div>
-              <div class="row"><div class="item">Sakallı (kaşarlı)</div><div class="price">450₺</div></div>
-              <div class="row"><div class="item">Pizza Poğaça</div><div class="price">500₺</div></div>
-              <div class="row"><div class="item">Kruvasan Poğaça</div><div class="price muted">İletişim</div></div>
-              <div class="row"><div class="item">Dereotlu Poğaça <span class="badge">12 adet</span></div><div class="price">250₺</div></div>
-            </div>
-          </div>
+        <div class="connected">
+          <div class="node" aria-hidden="true"></div>
 
-          <div class="card right">
-            <div class="card__head"><b>Börek</b><span>kg / adet</span></div>
-            <div class="rows">
-              <div class="row"><div class="item">Gül Böreği (kg)</div><div class="price">350₺</div></div>
-              <div class="row"><div class="item">Sigara Böreği (kg)</div><div class="price">350₺</div></div>
-              <div class="row"><div class="item">Mini Kruvasan Börek</div><div class="price">450₺</div></div>
-              <div class="row"><div class="item">Peynirli Su Böreği</div><div class="price">700₺</div></div>
-              <div class="row"><div class="item">Kıymalı Su Böreği</div><div class="price">950₺</div></div>
-              <div class="row"><div class="item">Hamburger Ekmeği (adet)</div><div class="price">25₺</div></div>
-              <div class="row"><div class="item">Açma (çeşitleri)</div><div class="price muted">İletişim</div></div>
-            </div>
+          <div class="grid">
+            <article class="card left">
+              <header class="card__head"><b>Poğaça</b><span>kg</span></header>
+              <div class="rows">
+                <div class="row"><div class="item">Maydanozlu Sakallı Poğaça</div><div class="price">400₺</div></div>
+                <div class="row"><div class="item">Kaşarlı Sakallı Poğaça</div><div class="price">500₺</div></div>
+                <div class="row"><div class="item">Pizza Poğaça</div><div class="price">500₺</div></div>
+                <div class="row">
+                  <div>
+                  <div class="item">Kruvasan Poğaça</div>
+                  <div class="note">Sade / Patatesli / Çikolatalı Ortalama 22 Adet</div>
+                    </div>
+                  <div class="price">450₺</div>
+                </div>                  
+                <div class="row">
+                  <div>
+                  <div class="item">Dereotlu Poğaça </div>
+                  <div class="note">Ortalama 12 Adet</div>
+                </div>
+                <div class="price">300₺</div>
+                </div>
+                <div class="row"><div class="item">Açma (çeşitleri)</div><div class="price"><span class="tag tag--contact">İletişim</span></div></div>
+              </div>
+            </article>
+
+            <article class="card right">
+              <header class="card__head"><b>Börek</b><span>kg / adet</span></header>
+              <div class="rows">
+                <div class="row">
+				<div>
+				<div class="item">Gül Böreği (kg)</div>
+				<div class="note">Peynirli / Patatesli</div>
+				</div>
+				<div class="price">450₺</div>
+				</div>
+				<div class="row"><div class="item">Kıymalı Gül Böreği (kg)</div><div class="price">650₺</div></div>
+                <div class="row"><div class="item">Sigara Böreği (kg)</div><div class="price">350₺</div></div>
+                <div class="row">
+                  <div>
+                  <div class="item">Mini Kruvasan Börek</div>
+                  <div class="note">Peynirli / Patatesli</div>
+                  </div>
+                  <div class="price">400₺</div>
+                </div>
+                <div class="row"><div class="item">Peynirli Su Böreği (kg)</div><div class="price">800₺</div></div>
+                <div class="row"><div class="item">Kıymalı Su Böreği (kg)</div><div class="price">1000₺</div></div>
+                <div class="row"><div class="item">Hamburger Ekmeği (adet)</div><div class="price">25₺</div></div>                
+              </div>
+            </article>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ADET & KİLOLUK -->
-  <section class="section" id="tatlilar">
-    <div class="wrap">
-      <h2 class="title">Adet & Kiloluk Tatlılar</h2>
+    <!-- TATLILAR -->
+    <section class="section" id="tatlilar">
+      <div class="wrap">
+        <h2 class="title">Adet & Kiloluk Tatlılar</h2>
 
-      <div class="connected">
-        <div class="node"></div>
-        <div class="grid">
-          <div class="card left">
-            <div class="card__head"><b>Adet</b><span>tatlı</span></div>
-            <div class="rows">
-              <div class="row"><div class="item">Köstebek Pasta (adet)</div><div class="price">40₺</div></div>
-              <div class="row"><div class="item">Düz Cupcake (adet)</div><div class="price">40₺</div></div>
-              <div class="row"><div class="item">Cupcake Kremalı (adet)</div><div class="price">60₺</div></div>
-              <div class="row">
-                <div>
-                  <div class="item">Cupcake Dolgulu Kremalı (adet)</div>
-                  <div class="note">Frambuaz / çikolata / beyaz çikolata dolgulu</div>
+        <div class="connected">
+          <div class="node" aria-hidden="true"></div>
+
+          <div class="grid">
+           
+            <article class="card left">
+              <header class="card__head"><b>Kiloluk</b><span>kg / kalıp</span></header>
+              <div class="rows">
+                <div class="row"><div class="item">Ekler (kg)</div><div class="price">650₺</div></div>
+                <div class="row"><div class="item">Profiterol (kg)</div><div class="price">650₺</div></div>
+                <div class="row"><div class="item">Cocostar Pasta</div><div class="price">850₺</div></div>
+                <div class="row">
+                  <div>
+                    <div class="item">Cheesecake (24 cm kalıp)</div>
+                    <div class="note">Frambuaz / Böğürtlen / Vişne / Limon</div>
+                  </div>
+                  <div class="price">1100₺</div>
                 </div>
-                <div class="price">65₺</div>
-              </div>
-              <div class="row"><div class="item">Mini Cheesecake (adet)</div><div class="price">70₺</div></div>
-            </div>
-          </div>
+                <div class="row"><div class="item">San Sebastian (24 cm kalıp) </div><div class="price">1200₺</div></div>
+                <div class="row"><div class="item">Rulo Pasta (muzlu / çilekli)</div><div class="price">600₺</div></div>
+                <div class="row"><div class="item">Red Velvet Pasta </div><div class="price">700₺</div></div>
 
-          <div class="card right">
-            <div class="card__head"><b>Kiloluk</b><span>kg / kalıp</span></div>
-            <div class="rows">
-              <div class="row"><div class="item">Ekler (kg)</div><div class="price">550₺</div></div>
-              <div class="row"><div class="item">Profiterol (kg)</div><div class="price">550₺</div></div>
-              <div class="row">
-                <div>
-                  <div class="item">Cheesecake (24 cm kalıp)</div>
-                  <div class="note">Frambuaz / böğürtlen / vişne / limon</div>
+                <div class="row">
+                  <div>
+                    <div class="item">Yaş Pasta</div>
+                    <div class="note">Kişi sayısı ve modele göre fiyat için iletişime geçin.</div>
+                  </div>
+                  <div class="price"><span class="tag tag--contact">İletişim</span></div>
                 </div>
-                <div class="price">950₺</div>
               </div>
-              <div class="row"><div class="item">Rulo Pasta (muzlu veya çilekli)</div><div class="price">500₺</div></div>
-	<div class="row"><div class="item">Yaş Pasta</div><div class="note">Kişi sayısı ve modele göre fiyat için iletişime geçin.</div>
-            </div>
-		
+            </article>
+
+             <article class="card right">
+              <header class="card__head"><b>Adet</b><span>tatlı</span></header>
+              <div class="rows">
+                <div class="row"><div class="item">Köstebek Pasta (adet)</div><div class="price">40₺</div></div>
+
+                <div class="row">
+                  <div>
+                    <div class="item">Düz Cupcake (adet)</div>
+                    <div class="note">Kremalı: 70₺</div>
+                  </div>
+                  <div class="price">45₺</div>
                 </div>
-          </div>
 
-          <div class="card span12 left">
-            <div class="card__head"><b>İletişim</b><span>sipariş</span></div>
-            <div class="rows">
-              <div class="row">               
-                <div class="price muted">İletişim</div>
+                <div class="row">
+                  <div>
+                    <div class="item">Cupcake Dolgulu Kremalı (adet)</div>
+                    <div class="note">Frambuaz / Çikolata / Beyaz Çikolata dolgulu</div>
+                  </div>
+                  <div class="price">80₺</div>
+                </div>
+                <div class="row"><div class="item">Mini Cheesecake (adet)</div><div class="price">80₺</div></div>
+                <div class="row"><div class="item">Magnolya (adet)</div><div class="price">75₺</div></div>
+                <div class="row"><div class="item">Cup Tiramisu (adet)</div><div class="price">75₺</div></div>              
               </div>
-            </div>
+            </article>
 
-            <div class="cta">
-              <!-- Buraya WhatsApp/Instagram linklerini sonradan ekleriz -->
-              <a class="btn" href="#" aria-label="İletişim">
-                <span class="icon"></span> WhatsApp / Instagram ile İletişim
-              </a>
-            </div>
-
-            <div style="height:12px"></div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <footer class="wrap">
-    © Lezzet Atölyesi • Fiyatlar dönemsel güncellenebilir.
+    © Lezzet Atölyesi • Fiyatlar dönemsel güncellenebilir. Listede bulunmayan ürünler için talepde bulunabilirsiniz.
   </footer>
+
+  <!-- Sabit Instagram Butonu (içeriği engellemez) -->
+  <a class="ig-fab"
+     href="https://instagram.com/lezzet_atolyesi_ankara/"
+     target="_blank" rel="noopener"
+     aria-label="Instagram: lezzet_atolyesi_ankara">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M7.5 3.5h9A4 4 0 0 1 20.5 7.5v9a4 4 0 0 1-4 4h-9a4 4 0 0 1-4-4v-9a4 4 0 0 1 4-4Z"
+            stroke="currentColor" stroke-width="1.6"/>
+      <path d="M12 16.2a4.2 4.2 0 1 0 0-8.4 4.2 4.2 0 0 0 0 8.4Z"
+            stroke="currentColor" stroke-width="1.6"/>
+      <path d="M17.2 6.8h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </a>
+
+  <script src="assets/app.js"></script>
 </body>
 </html>
