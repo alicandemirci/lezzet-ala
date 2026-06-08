@@ -32,32 +32,3 @@
   if (location.hash) setActive(location.hash);
   else if (sections[0]?.id) setActive('#' + sections[0].id);
 })();
-// Satır içi foto: aç/kapa (aynı kart içinde tek açık kalsın)
-(() => {
-  const buttons = document.querySelectorAll('.row-photo-btn');
-  if (!buttons.length) return;
-
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const row = btn.closest('.row');
-      const card = btn.closest('.card');
-      const panel = row?.querySelector('.row-photo');
-      if (!row || !panel || !card) return;
-
-      const isOpen = btn.getAttribute('aria-expanded') === 'true';
-
-      // aynı kart içindeki diğer açık panelleri kapat
-      card.querySelectorAll('.row-photo-btn[aria-expanded="true"]').forEach(b => {
-        if (b === btn) return;
-        b.setAttribute('aria-expanded', 'false');
-        const r = b.closest('.row');
-        const p = r?.querySelector('.row-photo');
-        if (p) p.hidden = true;
-      });
-
-      // toggle
-      btn.setAttribute('aria-expanded', String(!isOpen));
-      panel.hidden = isOpen;
-    });
-  });
-})();
