@@ -1,58 +1,333 @@
-/* ===============================
-   TEST GALERİ – KÜÇÜK ÖLÇEK
-   (EN ALTA YAPIŞTIR)
-================================ */
+/* Bu dosyaya CSS’i taşıyoruz (GitHub Pages için ideal) */
 
-/* Galeri tek satır */
-.gallery{
-  display:flex !important;
-  gap:8px !important;
-  overflow-x:auto !important;
-  padding: 4px 2px 8px !important;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
+/* not: index.html'de style yok, burası tek kaynak */
+
+:root{
+  --bg:#f6f1ea;
+  --paper:#ffffff;
+  --ink:#0b1f36;
+
+  --sage:#87957a;
+  --rose:#e6b9b2;
+  --navy:#0b2238;
+
+  --shadow:0 14px 38px rgba(11,31,54,.10);
+
+  --radius:22px;
+  --max:1120px;
+
+  /* instagram butonu */
+  --ig-size: 52px;
+  --ig-gap: 16px;
 }
-.gallery::-webkit-scrollbar{ display:none !important; }
 
-/* Kart */
-.shot{
-  flex: 0 0 140px !important;     /* KÜÇÜLDÜ */
-  scroll-snap-align: start;
-  border-radius: 12px !important;
-  overflow:hidden;
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;}
+
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(1100px 650px at 18% 10%, rgba(230,185,178,.22), transparent 55%),
+    radial-gradient(900px 520px at 86% 16%, rgba(135,149,122,.20), transparent 55%),
+    radial-gradient(900px 620px at 35% 95%, rgba(11,31,54,.06), transparent 60%),
+    var(--bg);
+
+  /* Buton içerik üstüne binmesin diye sayfa altına güvenli boşluk */
+  padding-bottom: calc(var(--ig-size) + var(--ig-gap) + 10px);
+}
+
+a{color:inherit}
+.wrap{width:min(var(--max), 92vw); margin:0 auto}
+.muted{opacity:.78}
+
+/* Leafwash */
+.leafwash{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.10;
+  mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900' viewBox='0 0 900 900'%3E%3Cg fill='none' stroke='%230b1f36' stroke-opacity='.45' stroke-width='1.4'%3E%3Cpath d='M120 640c120-90 210-240 190-410'/%3E%3Cpath d='M170 700c180-120 280-360 250-560'/%3E%3Cpath d='M760 690c-120-160-90-420 120-560'/%3E%3Cpath d='M710 630c-90-120-60-310 90-420'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 880px 880px;
+  background-position: 50% 20%;
+}
+
+/* Header */
+.site-header{padding:54px 0 0; text-align:center}
+.brand{
+  display:inline-flex;
+  align-items:center;
+  gap:16px;
+  padding:18px 22px;
+  border-radius:18px;
+  background:rgba(255,255,255,.78);
+  border:1px solid rgba(11,31,54,.12);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(6px);
+}
+.brand__logo{
+  width:62px;height:62px;border-radius:50%;
+  object-fit:cover;
+  border:1px solid rgba(11,31,54,.14);
   background:#fff;
-  border:1px solid rgba(11,31,54,.12) !important;
-  box-shadow: 0 6px 14px rgba(11,31,54,.08) !important;
+}
+.brand__name{
+  font-family:"Playfair Display", serif;
+  font-weight:600;
+  font-size:30px;
+  letter-spacing:.02em;
+  line-height:1.05;
+}
+.brand__sub{
+  margin-top:4px;
+  font-size:12px;
+  letter-spacing:.14em;
+  font-weight:800;
+  color:rgba(11,31,54,.66);
+}
+.topnote{
+  margin:12px auto 18px;
+  width:min(820px, 92vw);
+  font-size:13px;
+  color:rgba(11,31,54,.74);
 }
 
-/* Foto */
-.shot img{
-  width:100% !important;
-  height:90px !important;         /* KÜÇÜLDÜ */
-  object-fit:cover !important;
-  object-position:center !important;
-  display:block;
-  background:#eee;
+/* Nav sticky */
+.nav{
+  position:sticky;
+  top:10px;
+  z-index:50;
+  width:min(980px, 92vw);
+  margin:0 auto 18px;
+  padding:10px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.62);
+  border:1px solid rgba(11,31,54,.10);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 24px rgba(11,31,54,.08);
+}
+.nav__inner{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+}
+.nav a{
+  text-decoration:none;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.06em;
+  padding:10px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.60);
+  border:1px solid rgba(11,31,54,.10);
+  color:rgba(11,31,54,.74);
+  transition:transform .12s ease, background .12s ease, border-color .12s ease, color .12s ease;
+}
+.nav a:hover{transform:translateY(-1px); background:rgba(255,255,255,.86)}
+.nav a.active{
+  background: rgba(135,149,122,.14);
+  border-color: rgba(135,149,122,.30);
+  color: rgba(11,31,54,.92);
 }
 
-/* Başlık */
-.shot figcaption{
-  padding:6px 8px !important;
-  font-size:10px !important;
-  font-weight:700 !important;
-  letter-spacing:.04em !important;
-  text-transform:uppercase;
-  white-space:nowrap;
+/* Sections */
+.section{padding:26px 0 10px}
+.title{
+  margin:26px 0 14px;
+  text-align:center;
+  font-family:"Playfair Display", serif;
+  font-weight:600;
+  letter-spacing:.02em;
+  font-size:34px;
+  scroll-margin-top: 92px;
+}
+.subtitle{
+  text-align:center;
+  margin:-6px auto 14px;
+  font-size:13px;
+  color:rgba(11,31,54,.70);
+  width:min(780px, 92vw);
+}
+
+/* Connected layout */
+.connected{position:relative; padding:10px 0 0;}
+.grid{
+  display:grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap:18px;
+  align-items:stretch;
+}
+.connected::before{
+  content:"";
+  position:absolute;
+  top:0; bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:2px;
+  background:linear-gradient(to bottom, transparent, rgba(135,149,122,.55), rgba(230,185,178,.55), transparent);
+  border-radius:999px;
+  opacity:.75;
+}
+.card{
+  grid-column: span 6;
+  border-radius: var(--radius);
+  background:rgba(255,255,255,.82);
+  border:1px solid rgba(11,31,54,.12);
+  box-shadow: var(--shadow);
   overflow:hidden;
-  text-overflow:ellipsis;
+  position:relative;
+  min-height: 100%;
+}
+.card::after{
+  content:"";
+  position:absolute;
+  top:22px;
+  height:2px;
+  width:72px;
+  background:linear-gradient(90deg, rgba(135,149,122,.0), rgba(135,149,122,.55), rgba(230,185,178,.55));
+  opacity:.9;
+}
+.card.left::after{ right:-72px; }
+.card.right::after{
+  left:-72px;
+  background:linear-gradient(90deg, rgba(230,185,178,.55), rgba(135,149,122,.55), rgba(135,149,122,.0));
+}
+.node{
+  position:absolute;
+  top:16px;
+  width:14px;height:14px;border-radius:50%;
+  left:50%;
+  transform:translateX(-50%);
+  background:var(--paper);
+  border:1px solid rgba(11,31,54,.14);
+  box-shadow: 0 0 0 6px rgba(230,185,178,.18), 0 0 0 12px rgba(135,149,122,.10);
+  z-index:3;
+}
+.card__head{
+  padding:14px 16px 10px;
+  background:linear-gradient(180deg, rgba(11,34,56,.06), rgba(11,34,56,0));
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:12px;
+}
+.card__head b{
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(11,31,54,.70);
+}
+.card__head span{
+  font-size:12px;
+  color:rgba(11,31,54,.58);
+  font-weight:700;
+}
+.rows{padding:6px 14px 12px}
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  padding:10px 4px;
+  border-bottom:1px dashed rgba(11,31,54,.18);
+}
+.row:last-child{border-bottom:none}
+.item{font-weight:650; font-size:14px; line-height:1.25rem; color:rgba(11,31,54,.92)}
+.price{font-weight:850; white-space:nowrap; font-size:14px; color:var(--navy)}
+.note{font-size:12px; color:rgba(11,31,54,.66); margin-top:2px}
+
+/* Tags */
+.tag{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:850;
+  letter-spacing:.02em;
+  border:1px solid rgba(11,31,54,.14);
+  background: rgba(255,255,255,.6);
+  color: rgba(11,31,54,.80);
+}
+.tag::before{
+  content:"";
+  width:8px;height:8px;border-radius:50%;
+  background: rgba(230,185,178,.90);
+  box-shadow: 0 0 0 4px rgba(230,185,178,.22);
+}
+.tag--update{ background: linear-gradient(180deg, rgba(230,185,178,.22), rgba(135,149,122,.10)); }
+.tag--contact{ background: linear-gradient(180deg, rgba(135,149,122,.18), rgba(11,31,54,.04)); }
+.tag--contact::before{
+  background: rgba(135,149,122,.95);
+  box-shadow: 0 0 0 4px rgba(135,149,122,.18);
+}
+
+.span12{grid-column: span 12}
+.span12::after{display:none;}
+
+footer{
+  padding:30px 0 50px;
+  text-align:center;
+  font-size:12px;
+  color:rgba(11,31,54,.68);
+}
+
+/* Instagram FAB — küçük, sabit, içerikten bağımsız */
+.ig-fab{
+  position: fixed;
+  left: var(--ig-gap);
+  bottom: var(--ig-gap);
+  z-index: 999;
+  width: var(--ig-size);
+  height: var(--ig-size);
+  display: grid;
+  place-items: center;
+
+  border-radius: 20px;
+  /* Instagram'ın orijinal renk geçişi (gradient) */
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: #ffffff; /* İkon rengini beyaz yapıyoruz */
+  border: none;
+  box-shadow: 0 10px 24px rgba(220, 39, 67, 0.3); /* Gölgelendirmeyi butona uygun sıcak bir tona çektik */
+
+  transition: transform .14s ease, box-shadow .14s ease;
+}
+
+.ig-fab:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(220, 39, 67, 0.45);
+}
+
+.ig-fab svg{
+  opacity: 1; /* İkonun tam belirgin olmasını sağlıyoruz */
 }
 
 /* Mobil */
-@media (max-width:520px){
-  .shot{
-    flex-basis: 60vw !important;  /* Daha küçük */
+@media (max-width: 520px){
+  :root{ --ig-size: 48px; --ig-gap: 12px; }
+  .ig-fab{ border-radius: 18px; }
+}
+
+/* Mobile spine */
+@media (max-width: 900px){
+  .grid{gap:14px}
+  .card{grid-column: span 12;}
+  .title{font-size:30px}
+  .nav{top:8px; padding:10px}
+
+  .connected::before{left:18px; transform:none;}
+  .node{left:18px; transform:none;}
+  .card::after{
+    left:18px;
+    width:26px;
+    background:linear-gradient(90deg, rgba(230,185,178,.55), rgba(135,149,122,.55));
   }
-  .shot img{
-    height:140px !important;
-  }
+  .card.left::after,
+  .card.right::after{left:18px}
+  .span12::after{display:none;}
 }
